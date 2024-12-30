@@ -104,3 +104,88 @@ public class Solution {
     }
 }
 
+
+https://leetcode.com/problems/reverse-vowels-of-a-string/description/?envType=study-plan-v2&envId=leetcode-75
+Example 1:
+
+Input: s = "IceCreAm"
+
+Output: "AceCreIm"
+
+Explanation:
+
+The vowels in s are ['I', 'e', 'e', 'A']. On reversing the vowels, s becomes "AceCreIm".
+
+Example 2:
+
+Input: s = "leetcode"
+
+Output: "leotcede"
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+    public string ReverseVowels(string s) {
+        // Define a set of vowels for quick lookup
+        HashSet<char> vowels = new HashSet<char> { 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' };
+
+        // Convert the string to a character array
+        char[] chars = s.ToCharArray();
+
+        // Use two pointers to reverse vowels
+        int left = 0;
+        int right = chars.Length - 1;
+
+        while (left < right) {
+            // Move left pointer until a vowel is found
+            while (left < right && !vowels.Contains(chars[left])) {
+                left++;
+            }
+            
+            // Move right pointer until a vowel is found
+            while (left < right && !vowels.Contains(chars[right])) {
+                right--;
+            }
+
+            // Swap the vowels
+            char temp = chars[left];
+            chars[left] = chars[right];
+            chars[right] = temp;
+
+            // Move pointers inward
+            left++;
+            right--;
+        }
+
+        // Convert the character array back to a string
+        return new string(chars);
+    }
+}
+
+
+https://leetcode.com/problems/reverse-words-in-a-string/?envType=study-plan-v2&envId=leetcode-75
+Example 1:
+
+Input: s = "the sky is blue"
+Output: "blue is sky the"
+Example 2:
+
+Input: s = "  hello world  "
+Output: "world hello"
+Explanation: Your reversed string should not contain leading or trailing spaces.
+
+using System;
+using System.Linq;
+
+public class Solution {
+    public string ReverseWords(string s) {
+        // Step 1: Split the string into words, ignoring extra spaces
+        string[] words = s.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+        
+        // Step 2: Reverse the array of words
+        Array.Reverse(words);
+        
+        // Step 3: Join the words with a single space
+        return string.Join(" ", words);
+    }
+}
